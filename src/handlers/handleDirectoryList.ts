@@ -1,11 +1,18 @@
 import os from 'os';
 import fs from 'fs/promises';
+import { DirectoryObject } from '../types/DirectoryObject';
 
-export async function handleDirectoryList() {
+export async function handleDirectoryList(): Promise<DirectoryObject[]> {
   try {
-    const files = await fs.readdir(os.homedir(), { withFileTypes: true, encoding: 'utf-8' });
+    const objects = await fs.readdir(os.homedir(), { withFileTypes: true, encoding: 'utf-8' });
 
-    return files.filter((file) => file.isDirectory());
+    return objects.map((object) => ({
+      name: object.name,
+      path: `${os.homedir()}/${object.name}`,
+      rootPath: os.homedir(),
+      isFile: object.isFile(),
+      isDirectory: object.isDirectory(),
+    }));
   } catch (error) {
     return error;
   }
