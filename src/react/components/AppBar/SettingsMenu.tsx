@@ -18,6 +18,7 @@ export function SettingsMenu(props: SettingsMenu) {
 
   function onClick() {
     handleShowHiddenDirectories();
+    props.onClose();
   }
 
   return (
