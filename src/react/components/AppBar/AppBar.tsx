@@ -4,6 +4,7 @@ import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Divider from '@mui/material/Divider';
 import Avatar from '@mui/material/Avatar';
+import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import MinimizeIcon from '@mui/icons-material/Minimize';
@@ -13,9 +14,9 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useNavigate } from 'react-router-dom';
 import { UserInfo } from 'os';
-import { OptionsMenu } from './OptionsMenu';
+import { SettingsMenu } from './SettingsMenu';
 
-const Root = styled('div')(({ theme }) => ({
+const Root = styled(Paper)(({ theme }) => ({
   width: '100%',
   height: '45px',
   display: 'flex',
@@ -26,6 +27,7 @@ const Root = styled('div')(({ theme }) => ({
   WebkitUserSelect: 'none',
   userSelect: 'none',
   WebkitAppRegion: 'drag',
+  zIndex: 1,
 }));
 
 const NavigateContainer = styled('div')(({ theme }) => ({
@@ -98,7 +100,7 @@ export function AppBar() {
 
   return (
     <>
-      <Root>
+      <Root square>
         <NavigateContainer>
           <UserData>
             <Avatar
@@ -133,14 +135,14 @@ export function AppBar() {
           </Tooltip>
         </NavigateContainer>
         <ActionsContainer>
-          <Tooltip title="Maximize">
-            <StyledIconButton onClick={onMaximize} size="small">
-              <CropSquareIcon />
-            </StyledIconButton>
-          </Tooltip>
           <Tooltip title="Minimize">
             <StyledIconButton onClick={onMinimize} size="small">
               <MinimizeIcon />
+            </StyledIconButton>
+          </Tooltip>
+          <Tooltip title="Maximize">
+            <StyledIconButton onClick={onMaximize} size="small">
+              <CropSquareIcon />
             </StyledIconButton>
           </Tooltip>
           <Tooltip title="Close">
@@ -150,7 +152,7 @@ export function AppBar() {
           </Tooltip>
         </ActionsContainer>
       </Root>
-      <OptionsMenu anchorElement={anchorElement} onClose={closeSettings} />
+      <SettingsMenu anchorElement={anchorElement} onClose={closeSettings} />
     </>
   );
 }

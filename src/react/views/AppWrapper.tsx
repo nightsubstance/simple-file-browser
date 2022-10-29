@@ -2,7 +2,7 @@ import React from 'react';
 import { CssBaseline, createTheme, ThemeProvider, GlobalStyles } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 
-const theme = createTheme();
+const theme = createTheme({ palette: { mode: 'dark' } });
 
 export function AppWrapper() {
   return (

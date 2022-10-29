@@ -4,20 +4,26 @@ import { Main } from '../views/Main';
 import React from 'react';
 import { NoDirectory } from '../views/NoDirectory';
 import { Directory } from '../views/Directory';
+import { GlobalContextProvider } from '../components/GlobalContextProvider';
 
 export const router = createHashRouter([
   {
-    element: <AppWrapper />,
+    element: <GlobalContextProvider />,
     children: [
       {
-        element: <Main />,
-        path: '/',
+        element: <AppWrapper />,
         children: [
-          { element: <NoDirectory />, index: true },
-          { element: <Directory />, path: ':name' },
+          {
+            element: <Main />,
+            path: '/',
+            children: [
+              { element: <NoDirectory />, index: true },
+              { element: <Directory />, path: ':name' },
+            ],
+          },
+          { element: <Navigate to="/" />, path: '*' },
         ],
       },
-      { element: <Navigate to="/" />, path: '*' },
     ],
   },
 ]);

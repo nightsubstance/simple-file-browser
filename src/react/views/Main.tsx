@@ -8,25 +8,25 @@ const Root = styled('div')({
   width: '100%',
   height: '100%',
   boxSizing: 'border-box',
-  display: 'grid',
-  gridTemplateColumns: '300px 1fr',
-  gridTemplateRows: '60px 1fr',
+  display: 'flex',
+  flexDirection: 'column',
 });
 
 const Container = styled('div')({
   width: '100%',
   height: '100%',
-  gridColumn: '1/3',
+  boxSizing: 'border-box',
+  display: 'flex',
 });
 
 export function Main() {
   return (
     <Root>
+      <AppBar />
       <Container>
-        <AppBar />
+        <DirectoriesMenu />
+        <Outlet />
       </Container>
-      <DirectoriesMenu />
-      <Outlet />
     </Root>
   );
 }
