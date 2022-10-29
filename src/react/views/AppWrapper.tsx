@@ -5,9 +5,10 @@ import { QueryParamProvider } from 'use-query-params';
 import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6';
 import { SnackbarProvider } from 'notistack';
 import { useGlobalContext } from '../components/GlobalContextProvider';
+import grey from '@mui/material/colors/grey';
 
 const darkTheme = createTheme({ palette: { mode: 'dark' } });
-const lightTheme = createTheme({ palette: { mode: 'light' } });
+const lightTheme = createTheme({ palette: { mode: 'light', background: { default: grey['100'] } } });
 
 export function AppWrapper() {
   const { themeMode } = useGlobalContext();
