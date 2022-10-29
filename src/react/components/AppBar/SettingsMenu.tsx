@@ -33,7 +33,7 @@ export function SettingsMenu(props: SettingsMenu) {
       <Tooltip title="Show or hide hidden directories" placement="right">
         <MenuItem onClick={handleShowHiddenDirectoriesClick}>
           <ListItemIcon>{showHiddenDirectories ? <VisibilityIcon /> : <VisibilityOffIcon />}</ListItemIcon>
-          <ListItemText>Hidden directories</ListItemText>
+          <ListItemText>Hidden files</ListItemText>
         </MenuItem>
       </Tooltip>
       <Tooltip title="Change the theme from light to dark and vice versa" placement="right">
