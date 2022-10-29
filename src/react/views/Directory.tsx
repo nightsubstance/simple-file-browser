@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import { DirectoryTiles } from '../components/DirectoryTiles';
 import { DirectoryObject } from '../../types/DirectoryObject';
+import _ from 'lodash';
 
 const Root = styled('div')(({ theme }) => ({
   width: '100%',
@@ -17,14 +18,17 @@ export function Directory() {
 
   useEffect(() => {
     window.api.getDirectoryDetails(params.name).then((response: DirectoryObject[]) => {
-      console.log(response);
-      setFiles(response);
+      setFiles((prev) => {
+        if (_.isEqual(prev, response)) return prev;
+
+        return response;
+      });
     });
   }, [params.name]);
 
   return (
     <Root>
-      <DirectoryTiles data={files} />
+      <DirectoryTiles data={files} name={params.name} />
     </Root>
   );
 }

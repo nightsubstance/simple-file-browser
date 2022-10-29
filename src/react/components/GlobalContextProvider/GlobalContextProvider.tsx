@@ -21,8 +21,6 @@ export function GlobalContextProvider() {
     if (showHiddenDirectories) return objects;
 
     return objects.filter((item) => {
-      if (!item.isDirectory) return true;
-
       return !/(^|\/)\.[^/.]/g.test(item.name);
     });
   }

@@ -14,7 +14,7 @@ const Root = styled('div')({
 
 const Container = styled('div')({
   width: '100%',
-  height: '100%',
+  height: 'calc(100% - 45px)',
   boxSizing: 'border-box',
   display: 'flex',
 });

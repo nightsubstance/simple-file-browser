@@ -1,5 +1,4 @@
 import React, { useEffect, useId, useState } from 'react';
-import Paper from '@mui/material/Paper';
 import MenuList from '@mui/material/MenuList';
 import _ from 'lodash';
 import { DirectoriesMenuItem } from './DirectoriesMenuItem';
@@ -7,7 +6,7 @@ import { styled } from '@mui/material/styles';
 import { DirectoryObject } from '../../../types/DirectoryObject';
 import { useGlobalContext } from '../GlobalContextProvider';
 
-const StyledPaper = styled(Paper)({
+const Root = styled('div')({
   width: '300px',
   overflow: 'auto',
 });
@@ -35,12 +34,12 @@ export function DirectoriesMenu() {
   }, []);
 
   return (
-    <StyledPaper square>
+    <Root>
       <MenuList dense>
         {filterObjects(directoriesList).map((data, index) => (
           <DirectoriesMenuItem key={`${id}-${index}`} data={data} />
         ))}
       </MenuList>
-    </StyledPaper>
+    </Root>
   );
 }

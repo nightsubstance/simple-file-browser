@@ -38,7 +38,7 @@ export function DirectoryTile(props: DirectoryTileProps) {
   }
 
   return (
-    <Tooltip title={props.data.name}>
+    <Tooltip title={props.data.name} enterDelay={400} enterNextDelay={400}>
       <Root onClick={onClick}>
         {props.data.isDirectory ? <FolderIcon /> : <DescriptionIcon />}
         <Typography
