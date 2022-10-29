@@ -5,6 +5,7 @@ import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
 import { DirectoryObject } from '../../../types/DirectoryObject';
+import { useQueryParam, StringParam } from 'use-query-params';
 
 const Root = styled('div')(({ theme }) => ({
   width: '150px',
@@ -30,17 +31,24 @@ interface DirectoryTileProps {
 }
 
 export function DirectoryTile(props: DirectoryTileProps) {
+  const [, setPath] = useQueryParam('path', StringParam);
+
   function onClick() {
-    console.log(props.data);
-    window.api.openFile(props.data.path).then((response) => {
-      console.log(response);
-    });
+    if (props.data.isDirectory) {
+      setPath(props.data.path);
+    } else {
+      window.api.openFile(props.data.path);
+    }
   }
 
   return (
     <Tooltip title={props.data.name} enterDelay={400} enterNextDelay={400}>
       <Root onClick={onClick}>
-        {props.data.isDirectory ? <FolderIcon /> : <DescriptionIcon />}
+        {props.data.isDirectory ? (
+          <FolderIcon sx={{ fontSize: '3rem' }} />
+        ) : (
+          <DescriptionIcon sx={{ fontSize: '3rem' }} />
+        )}
         <Typography
           variant="body2"
           textAlign="center"

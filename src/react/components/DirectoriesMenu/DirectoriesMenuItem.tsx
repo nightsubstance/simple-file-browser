@@ -11,9 +11,7 @@ export function DirectoriesMenuItem(props: { data: DirectoryObject }) {
   const navigate = useNavigate();
 
   function onClick() {
-    navigate(`/${props.data.name}`, {
-      state: props.data,
-    });
+    navigate(`/${props.data.name}`);
   }
 
   return (

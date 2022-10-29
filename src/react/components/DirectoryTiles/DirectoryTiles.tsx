@@ -9,7 +9,15 @@ import { useGlobalContext } from '../GlobalContextProvider';
 
 const Root = styled(Card)({
   width: '100%',
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
 });
+
+const StyledCardHeader = styled(CardHeader)(({ theme }) => ({
+  padding: theme.spacing(),
+  borderBottom: `1px solid ${theme.palette.divider}`,
+}));
 
 const StyledCardContent = styled(CardContent)(({ theme }) => ({
   display: 'flex',
@@ -18,6 +26,9 @@ const StyledCardContent = styled(CardContent)(({ theme }) => ({
   justifyContent: 'flex-start',
   overflow: 'auto',
   gap: theme.spacing(),
+  width: '100%',
+  height: '100%',
+  padding: theme.spacing(),
 }));
 
 interface DirectoryTilesProps {
@@ -31,9 +42,9 @@ export function DirectoryTiles(props: DirectoryTilesProps) {
 
   return (
     <Root>
-      <CardHeader title={props.name} sx={{ paddingBottom: 0 }} />
+      <StyledCardHeader title={props.name} />
       <StyledCardContent>
-        {filterObjects(props.data).map((object) => (
+        {filterObjects(props.data || []).map((object) => (
           <DirectoryTile key={`${id}-${object.name}`} data={object} />
         ))}
       </StyledCardContent>

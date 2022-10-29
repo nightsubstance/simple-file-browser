@@ -2,7 +2,7 @@ import { ipcRenderer, contextBridge } from 'electron';
 
 export const api = {
   getDirectoriesList: () => ipcRenderer.invoke('directory:list'),
-  getDirectoryDetails: (name: string) => ipcRenderer.invoke('directory:details', name),
+  getDirectoryDetails: (path: string) => ipcRenderer.invoke('directory:details', path),
   openFile: (path: string) => ipcRenderer.invoke('file:open', path),
   getUserData: () => ipcRenderer.invoke('user:get_data'),
   closeWindow: () => ipcRenderer.send('window:close'),

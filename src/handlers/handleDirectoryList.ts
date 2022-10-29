@@ -12,6 +12,7 @@ export async function handleDirectoryList(): Promise<DirectoryObject[]> {
       rootPath: os.homedir(),
       isFile: object.isFile(),
       isDirectory: object.isDirectory(),
+      children: [],
     }));
   } catch (error) {
     return error;

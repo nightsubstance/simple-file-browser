@@ -3,20 +3,26 @@ import fs from 'fs/promises';
 import { IpcMainInvokeEvent } from 'electron';
 import { DirectoryObject } from '../types/DirectoryObject';
 
-export async function handleDirectoryDetails(event: IpcMainInvokeEvent, name: string): Promise<DirectoryObject[]> {
+export async function handleDirectoryDetails(event: IpcMainInvokeEvent, path: string): Promise<DirectoryObject> {
   try {
-    const rootPath = `${os.homedir()}/${name}`;
+    const rootPathArr = path.split('/');
+    const [rootName] = rootPathArr.splice(rootPathArr.length - 1, 1);
+    const files = await fs.readdir(`${os.homedir()}/${path}`, { withFileTypes: true, encoding: 'utf-8' });
 
-    const files = await fs.readdir(rootPath, { withFileTypes: true, encoding: 'utf-8' });
-
-    return files.map((file) => ({
-      name: file.name,
-      isDirectory: file.isDirectory(),
-      isFile: file.isFile(),
-      path: `${rootPath}/${file.name}`,
-      rootPath: rootPath,
-    }));
+    return {
+      name: rootName,
+      path: path,
+      isDirectory: true,
+      isFile: false,
+      children: files.map((file) => ({
+        name: file.name,
+        isDirectory: file.isDirectory(),
+        isFile: file.isFile(),
+        path: `${path}/${file.name}`,
+        children: [],
+      })),
+    };
   } catch (error) {
-    return error;
+    throw new Error(error);
   }
 }
