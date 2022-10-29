@@ -15,7 +15,7 @@ const Root = styled('div')(({ theme }) => ({
 }));
 
 export function Directory() {
-  const params = useParams<'path'>();
+  const params = useParams<'name'>();
   const [data, setData] = useState<DirectoryObject | null>(null);
   const [queryPath] = useQueryParam('path', StringParam);
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ export function Directory() {
   useEffect(() => {
     const interval = setInterval(() => {
       window.api
-        .getDirectoryDetails(queryPath || params.path)
+        .getDirectoryDetails(queryPath || params.name)
         .then((response: DirectoryObject) => {
           setData((prev) => {
             if (_.isEqual(prev, response)) return prev;
@@ -41,7 +41,7 @@ export function Directory() {
     }, 200);
 
     return () => clearInterval(interval);
-  }, [params.path, queryPath]);
+  }, [params.name, queryPath]);
 
-  return <Root>{!!data && <DirectoryTiles data={data.children} name={data.name} />}</Root>;
+  return <Root>{!!data && <DirectoryTiles rootName={params.name || ''} data={data.children} />}</Root>;
 }
