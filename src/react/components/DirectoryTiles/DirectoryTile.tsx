@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import FolderIcon from '@mui/icons-material/Folder';
 import DescriptionIcon from '@mui/icons-material/Description';
 import { styled } from '@mui/material/styles';
@@ -27,11 +27,17 @@ const Root = styled('div')(({ theme }) => ({
   },
 }));
 
+const IconImage = styled('img')({
+  width: '3rem',
+  height: '3rem',
+});
+
 interface DirectoryTileProps {
   data: DirectoryObject;
 }
 
 export function DirectoryTile(props: DirectoryTileProps) {
+  const [imageSrc, setImageSrc] = useState<string>('');
   const { enqueueSnackbar } = useSnackbar();
   const [, setPath] = useQueryParam('path', StringParam);
 
@@ -56,14 +62,23 @@ export function DirectoryTile(props: DirectoryTileProps) {
     }
   }
 
+  useEffect(() => {
+    window.api.getFileIcon(props.data.path).then((response: string) => {
+      setImageSrc(response);
+    });
+  }, []);
+
   return (
     <Tooltip title={props.data.name} enterDelay={400} enterNextDelay={400}>
       <Root onDoubleClick={onClick}>
-        {props.data.isDirectory ? (
-          <FolderIcon sx={{ fontSize: '3rem', userSelect: 'none' }} />
-        ) : (
-          <DescriptionIcon sx={{ fontSize: '3rem', userSelect: 'none' }} />
-        )}
+        {!!imageSrc && !props.data.isDirectory && <IconImage src={imageSrc} />}
+        {!imageSrc || props.data.isDirectory ? (
+          props.data.isDirectory ? (
+            <FolderIcon sx={{ fontSize: '3rem', userSelect: 'none' }} />
+          ) : (
+            <DescriptionIcon sx={{ fontSize: '3rem', userSelect: 'none' }} />
+          )
+        ) : null}
         <Typography
           sx={{ userSelect: 'none' }}
           variant="body2"
