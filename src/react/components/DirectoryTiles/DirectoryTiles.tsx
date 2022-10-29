@@ -1,12 +1,14 @@
 import React, { useId } from 'react';
-import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
+
 import { DirectoryObject } from '../../../types/DirectoryObject';
-import { DirectoryTile } from './DirectoryTile';
-import { useGlobalContext } from '../GlobalContextProvider';
 import { Breadcrumbs } from '../Breadcrumbs';
+import { useGlobalContext } from '../GlobalContextProvider';
+
+import { DirectoryTile } from './DirectoryTile';
 
 const Root = styled('div')(({ theme }) => ({
   width: '100%',

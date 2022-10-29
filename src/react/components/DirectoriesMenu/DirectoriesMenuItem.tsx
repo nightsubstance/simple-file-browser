@@ -1,9 +1,10 @@
 import React from 'react';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import FolderIcon from '@mui/icons-material/Folder';
 import { useMatch, useNavigate } from 'react-router-dom';
+import FolderIcon from '@mui/icons-material/Folder';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import MenuItem from '@mui/material/MenuItem';
+
 import { DirectoryObject } from '../../../types/DirectoryObject';
 
 export function DirectoriesMenuItem(props: { data: DirectoryObject }) {

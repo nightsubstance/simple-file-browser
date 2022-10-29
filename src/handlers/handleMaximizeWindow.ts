@@ -1,4 +1,4 @@
-import { IpcMainEvent, BrowserWindow } from 'electron';
+import { BrowserWindow,IpcMainEvent } from 'electron';
 
 export function handleMaximizeWindow(event: IpcMainEvent) {
   const webContents = event.sender;

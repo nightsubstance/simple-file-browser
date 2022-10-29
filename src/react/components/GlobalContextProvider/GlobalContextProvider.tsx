@@ -1,5 +1,6 @@
 import React, { createContext, useState } from 'react';
 import { Outlet } from 'react-router-dom';
+
 import { DirectoryObject } from '../../../types/DirectoryObject';
 
 export interface GlobalContextInterface {

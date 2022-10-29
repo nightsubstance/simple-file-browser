@@ -1,10 +1,12 @@
 import React, { useEffect, useId, useState } from 'react';
 import MenuList from '@mui/material/MenuList';
-import _ from 'lodash';
-import { DirectoriesMenuItem } from './DirectoriesMenuItem';
 import { styled } from '@mui/material/styles';
+import _ from 'lodash';
+
 import { DirectoryObject } from '../../../types/DirectoryObject';
 import { useGlobalContext } from '../GlobalContextProvider';
+
+import { DirectoriesMenuItem } from './DirectoriesMenuItem';
 
 const Root = styled('div')({
   width: '300px',

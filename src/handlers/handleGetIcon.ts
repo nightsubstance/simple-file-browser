@@ -1,5 +1,5 @@
-import os from 'os';
 import { app, IpcMainInvokeEvent } from 'electron';
+import os from 'os';
 
 export async function handleGetIcon(event: IpcMainInvokeEvent, path: string) {
   const image = await app.getFileIcon(`${os.homedir()}/${path}`, {

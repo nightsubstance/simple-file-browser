@@ -1,6 +1,7 @@
-import os from 'os';
-import fs from 'fs/promises';
 import { IpcMainInvokeEvent } from 'electron';
+import fs from 'fs/promises';
+import os from 'os';
+
 import { DirectoryObject } from '../types/DirectoryObject';
 
 export async function handleDirectoryDetails(event: IpcMainInvokeEvent, path: string): Promise<DirectoryObject> {

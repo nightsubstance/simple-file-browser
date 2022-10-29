@@ -1,8 +1,9 @@
 import React from 'react';
-import { styled } from '@mui/material/styles';
-import { DirectoriesMenu } from '../components/DirectoriesMenu';
 import { Outlet } from 'react-router-dom';
+import { styled } from '@mui/material/styles';
+
 import { AppBar } from '../components/AppBar';
+import { DirectoriesMenu } from '../components/DirectoriesMenu';
 
 const Root = styled('div')({
   width: '100%',

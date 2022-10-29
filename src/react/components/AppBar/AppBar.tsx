@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { styled } from '@mui/material/styles';
-import IconButton, { IconButtonProps } from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import Divider from '@mui/material/Divider';
-import Avatar from '@mui/material/Avatar';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
-import CloseIcon from '@mui/icons-material/Close';
-import MinimizeIcon from '@mui/icons-material/Minimize';
-import CropSquareIcon from '@mui/icons-material/CropSquare';
+import { useNavigate } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import CloseIcon from '@mui/icons-material/Close';
+import CropSquareIcon from '@mui/icons-material/CropSquare';
+import MinimizeIcon from '@mui/icons-material/Minimize';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { useNavigate } from 'react-router-dom';
+import Avatar from '@mui/material/Avatar';
+import Divider from '@mui/material/Divider';
+import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+import Paper from '@mui/material/Paper';
+import { styled } from '@mui/material/styles';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 import { UserInfo } from 'os';
+
 import { SettingsMenu } from './SettingsMenu';
 
 const Root = styled(Paper)(({ theme }) => ({

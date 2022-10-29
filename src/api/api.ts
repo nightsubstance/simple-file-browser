@@ -1,4 +1,4 @@
-import { ipcRenderer, contextBridge } from 'electron';
+import { contextBridge,ipcRenderer } from 'electron';
 
 export const api = {
   getDirectoriesList: () => ipcRenderer.invoke('directory:list'),

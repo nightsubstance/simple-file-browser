@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
-import { DirectoryTiles } from '../components/DirectoryTiles';
-import { DirectoryObject } from '../../types/DirectoryObject';
 import _ from 'lodash';
-import { StringParam, useQueryParam } from 'use-query-params';
 import { useSnackbar } from 'notistack';
+import { StringParam, useQueryParam } from 'use-query-params';
+
+import { DirectoryObject } from '../../types/DirectoryObject';
+import { DirectoryTiles } from '../components/DirectoryTiles';
 
 const Root = styled('div')(({ theme }) => ({
   width: '100%',

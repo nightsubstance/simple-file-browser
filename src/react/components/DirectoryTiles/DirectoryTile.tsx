@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import FolderIcon from '@mui/icons-material/Folder';
 import DescriptionIcon from '@mui/icons-material/Description';
+import FolderIcon from '@mui/icons-material/Folder';
 import { styled } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
-import { DirectoryObject } from '../../../types/DirectoryObject';
-import { useQueryParam, StringParam } from 'use-query-params';
+import Typography from '@mui/material/Typography';
 import { useSnackbar } from 'notistack';
+import { StringParam,useQueryParam } from 'use-query-params';
+
+import { DirectoryObject } from '../../../types/DirectoryObject';
 
 const Root = styled('div')(({ theme }) => ({
   width: '150px',

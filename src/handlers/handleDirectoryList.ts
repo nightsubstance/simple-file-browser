@@ -1,5 +1,6 @@
-import os from 'os';
 import fs from 'fs/promises';
+import os from 'os';
+
 import { DirectoryObject } from '../types/DirectoryObject';
 
 export async function handleDirectoryList(): Promise<DirectoryObject[]> {

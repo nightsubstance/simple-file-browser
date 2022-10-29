@@ -82,6 +82,7 @@
     "electron": "21.2.0",
     "eslint": "^8.26.0",
     "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-simple-import-sort": "^8.0.0",
     "fork-ts-checker-webpack-plugin": "^7.2.13",
     "node-loader": "^2.0.0",
     "prettier": "^2.7.1",

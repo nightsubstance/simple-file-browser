@@ -1,11 +1,12 @@
 import React from 'react';
-import { CssBaseline, createTheme, ThemeProvider, GlobalStyles } from '@mui/material';
 import { Outlet } from 'react-router-dom';
+import { createTheme, CssBaseline, GlobalStyles,ThemeProvider } from '@mui/material';
+import grey from '@mui/material/colors/grey';
+import { SnackbarProvider } from 'notistack';
 import { QueryParamProvider } from 'use-query-params';
 import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6';
-import { SnackbarProvider } from 'notistack';
+
 import { useGlobalContext } from '../components/GlobalContextProvider';
-import grey from '@mui/material/colors/grey';
 
 const darkTheme = createTheme({ palette: { mode: 'dark' } });
 const lightTheme = createTheme({ palette: { mode: 'light', background: { default: grey['100'] } } });
