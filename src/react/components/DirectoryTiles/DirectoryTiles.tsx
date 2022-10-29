@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
+import Typography from '@mui/material/Typography';
 import { DirectoryObject } from '../../../types/DirectoryObject';
 import { DirectoryTile } from './DirectoryTile';
 import { useGlobalContext } from '../GlobalContextProvider';
@@ -40,13 +41,19 @@ export function DirectoryTiles(props: DirectoryTilesProps) {
   const id = useId();
   const { filterObjects } = useGlobalContext();
 
+  const data = filterObjects(props.data);
+
   return (
     <Root>
       <StyledCardHeader title={props.name} />
       <StyledCardContent>
-        {filterObjects(props.data).map((object) => (
-          <DirectoryTile key={`${id}-${object.name}`} data={object} />
-        ))}
+        {data.length === 0 ? (
+          <Typography variant="body1" color="text.secondary">
+            Directory is empty
+          </Typography>
+        ) : (
+          data.map((object) => <DirectoryTile key={`${id}-${object.name}`} data={object} />)
+        )}
       </StyledCardContent>
     </Root>
   );
