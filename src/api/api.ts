@@ -20,6 +20,7 @@ export const api = {
   },
   getDirectoriesList: () => ipcRenderer.invoke('directory:list'),
   getDirectoryDetails: (name: string) => ipcRenderer.invoke('directory:details', name),
+  openFile: (path: string) => ipcRenderer.invoke('file:open', path),
 };
 
 contextBridge.exposeInMainWorld('api', api);

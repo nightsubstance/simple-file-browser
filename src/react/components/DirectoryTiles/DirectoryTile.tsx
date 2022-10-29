@@ -32,6 +32,9 @@ interface DirectoryTileProps {
 export function DirectoryTile(props: DirectoryTileProps) {
   function onClick() {
     console.log(props.data);
+    window.api.openFile(props.data.path).then((response) => {
+      console.log(response);
+    });
   }
 
   return (
