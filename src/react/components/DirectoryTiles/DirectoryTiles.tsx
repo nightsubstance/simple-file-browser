@@ -27,7 +27,7 @@ const StyledCardContent = styled(CardContent)(({ theme }) => ({
   overflow: 'auto',
   gap: theme.spacing(),
   width: '100%',
-  height: '100%',
+  maxHeight: '100%',
   padding: theme.spacing(),
 }));
 
@@ -44,7 +44,7 @@ export function DirectoryTiles(props: DirectoryTilesProps) {
     <Root>
       <StyledCardHeader title={props.name} />
       <StyledCardContent>
-        {filterObjects(props.data || []).map((object) => (
+        {filterObjects(props.data).map((object) => (
           <DirectoryTile key={`${id}-${object.name}`} data={object} />
         ))}
       </StyledCardContent>

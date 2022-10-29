@@ -22,19 +22,25 @@ export function Directory() {
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
-    window.api
-      .getDirectoryDetails(queryPath || params.path)
-      .then((response: DirectoryObject) => {
-        setData((prev) => {
-          if (_.isEqual(prev, response)) return prev;
+    const interval = setInterval(() => {
+      window.api
+        .getDirectoryDetails(queryPath || params.path)
+        .then((response: DirectoryObject) => {
+          setData((prev) => {
+            if (_.isEqual(prev, response)) return prev;
 
-          return response;
+            return response;
+          });
+        })
+        .catch(() => {
+          navigate(-1);
+          enqueueSnackbar('Something went wrong, check if you have permissions to this directory.', {
+            variant: 'error',
+          });
         });
-      })
-      .catch(() => {
-        navigate(-1);
-        enqueueSnackbar('Something went wrong, check if you have permissions to this directory.', { variant: 'error' });
-      });
+    }, 200);
+
+    return () => clearInterval(interval);
   }, [params.path, queryPath]);
 
   return <Root>{!!data && <DirectoryTiles data={data.children} name={data.name} />}</Root>;

@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
 import { DirectoryObject } from '../../../types/DirectoryObject';
 import { useQueryParam, StringParam } from 'use-query-params';
+import { useSnackbar } from 'notistack';
 
 const Root = styled('div')(({ theme }) => ({
   width: '150px',
@@ -31,25 +32,40 @@ interface DirectoryTileProps {
 }
 
 export function DirectoryTile(props: DirectoryTileProps) {
+  const { enqueueSnackbar } = useSnackbar();
   const [, setPath] = useQueryParam('path', StringParam);
 
   function onClick() {
     if (props.data.isDirectory) {
       setPath(props.data.path);
     } else {
-      window.api.openFile(props.data.path);
+      window.api
+        .openFile(props.data.path)
+        .then((response) => {
+          if (response === 'Failed to open path') {
+            enqueueSnackbar('Failed to open path', { variant: 'error' });
+          }
+        })
+        .catch((error) => {
+          if (error instanceof Error) {
+            enqueueSnackbar(error.message, { variant: 'error' });
+          } else {
+            enqueueSnackbar('Unknown error', { variant: 'error' });
+          }
+        });
     }
   }
 
   return (
     <Tooltip title={props.data.name} enterDelay={400} enterNextDelay={400}>
-      <Root onClick={onClick}>
+      <Root onDoubleClick={onClick}>
         {props.data.isDirectory ? (
-          <FolderIcon sx={{ fontSize: '3rem' }} />
+          <FolderIcon sx={{ fontSize: '3rem', userSelect: 'none' }} />
         ) : (
-          <DescriptionIcon sx={{ fontSize: '3rem' }} />
+          <DescriptionIcon sx={{ fontSize: '3rem', userSelect: 'none' }} />
         )}
         <Typography
+          sx={{ userSelect: 'none' }}
           variant="body2"
           textAlign="center"
           textOverflow="ellipsis"
