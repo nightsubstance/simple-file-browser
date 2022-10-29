@@ -13,7 +13,7 @@ export function Breadcrumbs(props: BreadcrumbsProps) {
   const navigate = useNavigate();
   const [path = props.rootName, setPath] = useQueryParam('path', StringParam);
 
-  const data = useMemo<{ name: string; path: string }[]>(() => {
+  const data: { name: string; path: string }[] = useMemo(() => {
     return path.split('/').map((name, index, arr) => ({
       name,
       path: [...arr].splice(0, index + 1).join('/'),
@@ -25,12 +25,14 @@ export function Breadcrumbs(props: BreadcrumbsProps) {
   return (
     <MuiBreadcrumbs>
       <Chip icon={<HomeIcon />} label="Landing" size="small" onClick={() => navigate('/')} />
-      {data.map((item, index) => (
+      {data.map((item, index, arr) => (
         <Chip
           key={item.name}
           label={item.name}
           size="small"
-          onClick={() => (index === 0 ? setPath(undefined) : setPath(item.path))}
+          onClick={index === arr.length - 1 ? undefined : () => (index === 0 ? setPath(undefined) : setPath(item.path))}
+          sx={{ fontWeight: index === arr.length - 1 ? 'bold' : null }}
+          color={index === arr.length - 1 ? 'primary' : 'default'}
         />
       ))}
     </MuiBreadcrumbs>
