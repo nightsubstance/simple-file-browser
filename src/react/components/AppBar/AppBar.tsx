@@ -119,7 +119,7 @@ export function AppBar() {
           </UserData>
           <Divider orientation="vertical" />
           <Tooltip title="Settings">
-            <StyledIconButton onClick={openSettings}>
+            <StyledIconButton data-testid="settings-button" onClick={openSettings}>
               <SettingsIcon />
             </StyledIconButton>
           </Tooltip>

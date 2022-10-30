@@ -30,15 +30,20 @@ export function SettingsMenu(props: SettingsMenu) {
   }
 
   return (
-    <Menu open={!!props.anchorElement} anchorEl={props.anchorElement} onClose={props.onClose}>
+    <Menu
+      open={!!props.anchorElement}
+      anchorEl={props.anchorElement}
+      onClose={props.onClose}
+      data-testid="settings-menu"
+    >
       <Tooltip title="Show or hide hidden directories" placement="right">
-        <MenuItem onClick={handleShowHiddenDirectoriesClick}>
+        <MenuItem data-testid="settings-menu-hidden-files-handler" onClick={handleShowHiddenDirectoriesClick}>
           <ListItemIcon>{showHiddenDirectories ? <VisibilityIcon /> : <VisibilityOffIcon />}</ListItemIcon>
           <ListItemText>Hidden files</ListItemText>
         </MenuItem>
       </Tooltip>
       <Tooltip title="Change the theme from light to dark and vice versa" placement="right">
-        <MenuItem onClick={handleThemeModeClick}>
+        <MenuItem data-testid="settings-menu-theme-mode-handler" onClick={handleThemeModeClick}>
           <ListItemIcon>{themeMode === 'dark' ? <DarkModeIcon /> : <LightModeIcon />}</ListItemIcon>
           <ListItemText>Theme mode</ListItemText>
         </MenuItem>

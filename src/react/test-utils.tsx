@@ -1,11 +1,17 @@
 import React, { ReactElement } from 'react';
-import { RouterProvider } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { render, RenderOptions } from '@testing-library/react';
 
-import { memoryRouter } from './router';
+import '@testing-library/jest-dom';
 
-function TestRoot() {
-  return <RouterProvider router={memoryRouter} />;
+import { GlobalContextProvider } from './components/GlobalContextProvider';
+
+function TestRoot(props: { children: React.ReactNode }) {
+  return (
+    <GlobalContextProvider>
+      <MemoryRouter>{props.children}</MemoryRouter>
+    </GlobalContextProvider>
+  );
 }
 
 function customRender(ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>) {
