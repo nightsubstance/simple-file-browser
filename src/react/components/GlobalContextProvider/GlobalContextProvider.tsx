@@ -1,5 +1,4 @@
 import React, { createContext, useState } from 'react';
-import { Outlet } from 'react-router-dom';
 
 import { DirectoryObject } from '../../../types/DirectoryObject';
 
@@ -13,7 +12,7 @@ export interface GlobalContextInterface {
 
 export const GlobalContext = createContext(null as GlobalContextInterface);
 
-export function GlobalContextProvider() {
+export function GlobalContextProvider(props: { children: React.ReactNode }) {
   const [showHiddenDirectories, setShowHiddenDirectories] = useState<boolean>(false);
   const [themeMode, setThemeMode] = useState<'dark' | 'light'>('dark');
 
@@ -41,7 +40,7 @@ export function GlobalContextProvider() {
     <GlobalContext.Provider
       value={{ showHiddenDirectories, handleShowHiddenDirectories, filterObjects, handleThemeMode, themeMode }}
     >
-      <Outlet />
+      {props.children}
     </GlobalContext.Provider>
   );
 }

@@ -1,1 +1,1 @@
-export { router } from './router';
+export { hashRouter, memoryRouter } from './router';

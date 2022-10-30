@@ -1,8 +1,13 @@
 import React from 'react';
 import { RouterProvider } from 'react-router-dom';
 
-import { router } from './router';
+import { GlobalContextProvider } from './components/GlobalContextProvider';
+import { memoryRouter } from './router';
 
 export function Root() {
-  return <RouterProvider router={router} />;
+  return (
+    <GlobalContextProvider>
+      <RouterProvider router={memoryRouter} />
+    </GlobalContextProvider>
+  );
 }

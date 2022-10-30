@@ -1,30 +1,33 @@
 import React from 'react';
-import { createHashRouter, Navigate } from 'react-router-dom';
+import { createHashRouter, createMemoryRouter, Navigate, RouteObject } from 'react-router-dom';
 
-import { GlobalContextProvider } from '../components/GlobalContextProvider';
 import { AppWrapper } from '../views/AppWrapper';
 import { Directory } from '../views/Directory';
 import { Landing } from '../views/Landing';
 import { Main } from '../views/Main';
 
-export const router = createHashRouter([
+const routes: RouteObject[] = [
   {
-    element: <GlobalContextProvider />,
+    element: <AppWrapper />,
     children: [
       {
-        element: <AppWrapper />,
+        element: <Main />,
+        path: '/',
         children: [
-          {
-            element: <Main />,
-            path: '/',
-            children: [
-              { element: <Landing />, index: true },
-              { element: <Directory />, path: ':name' },
-            ],
-          },
-          { element: <Navigate to="/" />, path: '*' },
+          { element: <Landing />, index: true },
+          { element: <Directory />, path: ':name' },
         ],
       },
+      { element: <Navigate to="/" />, path: '*' },
     ],
   },
-]);
+];
+
+/**
+ * hashRouter for regular application
+ */
+export const hashRouter = createHashRouter(routes);
+/**
+ * memoryRouter is used for tests
+ */
+export const memoryRouter = createMemoryRouter(routes);
