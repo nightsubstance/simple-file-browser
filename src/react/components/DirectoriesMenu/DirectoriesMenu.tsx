@@ -18,19 +18,23 @@ export function DirectoriesMenu() {
   const [directoriesList, setDirectoriesList] = useState<DirectoryObject[]>([]);
   const { filterObjects } = useGlobalContext();
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      window.api.getDirectoriesList().then((response: DirectoryObject[]) => {
-        const newDirectoriesList = response.filter((i) => i.isDirectory);
-        setDirectoriesList((prev) => {
-          if (_.isEqual(prev, newDirectoriesList)) {
-            return prev;
-          }
+  function getData() {
+    window.api.getDirectoriesList().then((response: DirectoryObject[]) => {
+      const newDirectoriesList = response.filter((i) => i.isDirectory);
+      setDirectoriesList((prev) => {
+        if (_.isEqual(prev, newDirectoriesList)) {
+          return prev;
+        }
 
-          return newDirectoriesList;
-        });
+        return newDirectoriesList;
       });
-    }, 100);
+    });
+  }
+
+  useEffect(() => {
+    getData();
+
+    const interval = setInterval(() => getData(), 100);
 
     return () => clearInterval(interval);
   }, []);

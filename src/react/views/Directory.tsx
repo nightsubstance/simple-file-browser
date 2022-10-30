@@ -22,24 +22,28 @@ export function Directory() {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      window.api
-        .getDirectoryDetails(queryPath || params.name)
-        .then((response: DirectoryObject) => {
-          setData((prev) => {
-            if (_.isEqual(prev, response)) return prev;
+  function getData() {
+    window.api
+      .getDirectoryDetails(queryPath || params.name)
+      .then((response: DirectoryObject) => {
+        setData((prev) => {
+          if (_.isEqual(prev, response)) return prev;
 
-            return response;
-          });
-        })
-        .catch(() => {
-          navigate(-1);
-          enqueueSnackbar('Something went wrong, check if you have permissions to this directory.', {
-            variant: 'error',
-          });
+          return response;
         });
-    }, 200);
+      })
+      .catch(() => {
+        navigate(-1);
+        enqueueSnackbar('Something went wrong, check if you have permissions to this directory.', {
+          variant: 'error',
+        });
+      });
+  }
+
+  useEffect(() => {
+    getData();
+
+    const interval = setInterval(() => getData(), 200);
 
     return () => clearInterval(interval);
   }, [params.name, queryPath]);
