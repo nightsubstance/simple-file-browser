@@ -10,7 +10,9 @@
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "eslint --ext .ts,.tsx .",
-    "prettier": "prettier ./src/**"
+    "prettier": "prettier ./src/**",
+    "test": "jest",
+    "test:coverage": "jest --collectCoverage"
   },
   "keywords": [],
   "author": {
