@@ -13,6 +13,7 @@ import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
+import { useSnackbar } from 'notistack';
 import { UserInfo } from 'os';
 
 import { SettingsMenu } from './SettingsMenu';
@@ -62,6 +63,7 @@ export function AppBar() {
   const [userData, setUserData] = useState<UserInfo<string> | null>(null);
   const [anchorElement, setAnchorElement] = useState<HTMLElement | null>(null);
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   function onClose() {
     window.api.closeWindow();
@@ -94,9 +96,18 @@ export function AppBar() {
   }
 
   useEffect(() => {
-    window.api.getUserData().then((response) => {
-      setUserData(response);
-    });
+    window.api
+      .getUserData()
+      .then((response) => {
+        setUserData(response);
+      })
+      .catch((error) => {
+        if (error instanceof Error) {
+          enqueueSnackbar(error.message, { variant: 'error' });
+        } else {
+          enqueueSnackbar('Unknown error', { variant: 'error' });
+        }
+      });
   }, []);
 
   return (
